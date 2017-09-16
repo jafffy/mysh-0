@@ -2,7 +2,7 @@
 CC=gcc -std=c99
 CFLAGS=-I./src -I./include
 LIB=
-OBJ=./src/utils.o
+OBJ=./src/utils.o ./src/commands.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

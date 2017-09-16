@@ -84,7 +84,7 @@ TEST(CommandParsingTest, EmptyCommand) {
   char** argv = alloc_string_array(1, 1024);
   int argc = -1;
 
-  mysh_parse_command("", &argc, argv);
+  mysh_parse_command("   \n \t    ", &argc, argv);
 
   EXPECT_EQ(argc, 1);
   EXPECT_STREQ(argv[0], "");
