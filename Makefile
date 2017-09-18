@@ -12,9 +12,9 @@ mysh: $(OBJ)
 
 # For testing
 CXX=g++ -std=c++11
-TESTING_FLAGS=-I./tests/src -I./tests/include $(CFLAGS)
+TESTING_FLAGS=-I./tests/src -I./tests/include $(CFLAGS) -Wno-write-strings
 TESTING_LIB=-lgtest -lgtest_main -L./tests/lib -lpthread $(LIB)
-TESTING_SRC=./tests/src/command_parsing_test.cc
+TESTING_SRC=./tests/src/command_parsing_test.cc ./tests/src/command_validate_test.cc
 TESTING_EXE=mysh-test
 
 test: $(OBJ)
