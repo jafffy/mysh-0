@@ -5,41 +5,44 @@
 #include "commands.h"
 #include "utils.h"
 
+static void release_argv(int argc, char** argv);
+
 int main()
 {
   char buf[8096];
   int argc;
   char** argv;
 
-  // initialize command buffer
-  argv = (char**)malloc(32);
-  for (int i = 0; i < 32; ++i) {
-    argv[i] = (char*)malloc(8096);
-  }
-
   while (1) {
     fgets(buf, 8096, stdin);
 
-    mysh_parse_command(buf, &argc, argv);
+    mysh_parse_command(buf, &argc, &argv);
 
     if (strcmp(buf, "") == 0) {
-      continue;
+      goto release_and_continue;
     } else if (strcmp(argv[0], "cd") == 0) {
       do_cd(argc, argv);
     } else if (strcmp(argv[0], "pwd") == 0) {
       do_pwd(argc, argv);
     } else if (strcmp(argv[0], "exit") == 0) {
-      break;
+      goto release_and_continue;
     } else {
       fprintf(stderr, "%s: command not found\n", argv[0]);
     }
+release_and_continue:
+    release_argv(argc, argv);
+    continue;
+release_and_exit:
+    release_argv(argc, argv);
+    break;
   }
 
-  // destroy command buffer
-  for (int i = 0; i < 32; ++i) {
+  return 0;
+}
+
+static void release_argv(int argc, char** argv) {
+  for (int i = 0; i < argc; ++i) {
     free(argv[i]);
   }
   free(argv);
-
-  return 0;
 }
