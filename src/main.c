@@ -21,9 +21,13 @@ int main()
     if (strcmp(buf, "") == 0) {
       goto release_and_continue;
     } else if (strcmp(argv[0], "cd") == 0) {
-      do_cd(argc, argv);
+      if (do_cd(argc, argv)) {
+        fprintf(stderr, "cd: Invalid arguments\n");
+      }
     } else if (strcmp(argv[0], "pwd") == 0) {
-      do_pwd(argc, argv);
+      if (do_pwd(argc, argv)) {
+        fprintf(stderr, "pwd: Invalid arguments\n");
+      }
     } else if (strcmp(argv[0], "exit") == 0) {
       goto release_and_continue;
     } else {
