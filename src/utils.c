@@ -38,7 +38,7 @@ void mysh_parse_command(const char* command,
   }
   free(tmp);
 
-  printf("%d\n",*argc);
-  for(int i =0;i<*argc;i++)
-    printf("argv[%d] : %s\n",i,(*argv)[i]);
+//  printf("%d\n",*argc);
+//  for(int i =0;i<*argc;i++)
+//    printf("argv[%d] : %s\n",i,(*argv)[i]);
 }
