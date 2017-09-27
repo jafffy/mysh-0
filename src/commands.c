@@ -1,5 +1,6 @@
 #include <string.h>
-
+#include <stdio.h>
+#include <unistd.h>
 #include "commands.h"
 
 int do_cd(int argc, char** argv) {
@@ -7,7 +8,7 @@ int do_cd(int argc, char** argv) {
     return -1;
 
   // TODO: Fill it!
-  return 0;
+  return chdir(argv[1]);
 }
 
 int do_pwd(int argc, char** argv) {
@@ -15,16 +16,24 @@ int do_pwd(int argc, char** argv) {
     return -1;
 
   // TODO: Fill it!
-
-  return 0;
+  char output[200];
+  if(getcwd(output,200)!=NULL){
+    fprintf(stdout,"%s\n",output);
+    return 0;
+  }
+  return -1;
 }
 
 int validate_cd_argv(int argc, char** argv) {
   // TODO: Fill it!
-  return 1;
+  if (strcmp(argv[0],"cd")==0 && argc==2)
+    return 1;
+  return 0;
 }
 
 int validate_pwd_argv(int argc, char** argv) {
   // TODO: Fill it!
-  return 1;
+  if(strcmp(argv[0],"pwd")==0 && argc==1)
+    return 1;
+  return 0;
 }

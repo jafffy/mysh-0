@@ -85,8 +85,8 @@ TEST(CommandParsingTest, EmptyCommand) {
 
   mysh_parse_command("   \n \t    ", &argc, &argv);
 
-  ASSERT_EQ(argc, 1);
-  EXPECT_STREQ(argv[0], "");
+  ASSERT_EQ(argc, 0);
+//  EXPECT_STREQ(argv[0], "");
 
   free_string_array(&argv, argc);
 }
@@ -98,5 +98,5 @@ static void free_string_array(char*** argv, int num_str) {
 
   free(*argv);
 
-  argv = NULL;
+  *argv = NULL;
 }
