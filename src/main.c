@@ -5,7 +5,7 @@
 #include "commands.h"
 #include "utils.h"
 
-static void release_argv(int argc, char** argv);
+static void release_argv(int argc, char*** argv);
 
 int main()
 {
@@ -34,19 +34,20 @@ int main()
       fprintf(stderr, "%s: command not found\n", argv[0]);
     }
 release_and_continue:
-    release_argv(argc, argv);
+    release_argv(argc, &argv);
     continue;
 release_and_exit:
-    release_argv(argc, argv);
+    release_argv(argc, &argv);
     break;
   }
 
   return 0;
 }
 
-static void release_argv(int argc, char** argv) {
+static void release_argv(int argc, char*** argv) {
   for (int i = 0; i < argc; ++i) {
-    free(argv[i]);
+    free((*argv)[i]);
   }
-  free(argv);
+  free(*argv);
+  *argv=NULL;
 }
