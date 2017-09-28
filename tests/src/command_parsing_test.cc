@@ -98,5 +98,5 @@ static void free_string_array(char*** argv, int num_str) {
 
   free(*argv);
 
-  argv = NULL;
+  *argv = NULL;
 }
