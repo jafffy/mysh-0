@@ -28,7 +28,7 @@ TEST(CDValidateTest, ValidateCDArgv3) {
     "cd"
   };
 
-  ASSERT_EQ(validate_cd_argv(argc, argv), 0);
+  ASSERT_EQ(validate_cd_argv(argc, argv), 1);
 }
 
 TEST(CDValidateTest, ValidateCDArgv4) {
